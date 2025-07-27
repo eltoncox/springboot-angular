@@ -57,7 +57,7 @@ public class CategoriaResource {
 	  .orElse(ResponseEntity.notFound().build());
 	}
 	
-	// 3.8. Validando atributos desconhecidos
+	// 3.8. Validando atributos desconhecidos 
 	
 	
 	
