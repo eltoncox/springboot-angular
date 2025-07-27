@@ -2,7 +2,6 @@ package com.example.algamoney_api.resource;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,6 +42,8 @@ public class CategoriaResource {
 	}
 	
 	/**
+	 * uma opção com Optional
+	 * 
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Categoria> buscarPeloCodigo(@PathVariable Long codigo) {
 	Optional<Categoria> categoria = this.categoriaRepository.findById(codigo);
@@ -57,7 +58,8 @@ public class CategoriaResource {
 	  .orElse(ResponseEntity.notFound().build());
 	}
 	
-	// 3.8. Validando atributos desconhecidos 
+	
+	
 	
 	
 	
