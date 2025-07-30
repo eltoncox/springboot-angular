@@ -1,11 +1,11 @@
 package com.example.algamoney_api.repository.filter;
-
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class LancamentoFilter {
-    private String descricao;
+
+	private String descricao;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataVencimentoDe;
@@ -35,5 +35,6 @@ public class LancamentoFilter {
 
 	public void setDataVencimentoAte(LocalDate dataVencimentoAte) {
 		this.dataVencimentoAte = dataVencimentoAte;
-	} 
+	}
+
 }
