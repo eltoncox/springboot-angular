@@ -25,6 +25,7 @@ import com.example.algamoney_api.event.RecursoCriadoEvent;
 import com.example.algamoney_api.exceptionHandler.AlgamoneyExceptionHandler.Erro;
 import com.example.algamoney_api.model.Lancamento;
 import com.example.algamoney_api.repository.LancamentoRepository;
+import com.example.algamoney_api.repository.filter.LancamentoFilter;
 import com.example.algamoney_api.service.LancamentoService;
 import com.example.algamoney_api.service.exception.PessoaInexistenteOuInativaException;
 
@@ -45,7 +46,7 @@ public class LancamentoResource {
 	private  MessageSource messageSource;
 	
 	@GetMapping
-	public List<Lancamento> listar() {
+	public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
 		return lancamentoRepository.findAll();
 	}
 	
