@@ -1,29 +1,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.0</version>
-    <relativePath/>
-  </parent>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.0</version>
+		<relativePath />
+	</parent>
 
-  <groupId>com.example.algamoney-api</groupId>
-  <artifactId>algamoney-api</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>algamoney-api</name>
-  <description>Demo project for Spring Boot</description>
+	<groupId>com.example.algamoney-api</groupId>
+	<artifactId>algamoney-api</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>algamoney-api</name>
+	<description>Demo project for Spring Boot</description>
 
-  <properties>
-    <java.version>17</java.version>
-  </properties>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
 
-  <dependencies>
+	<dependencies>
 
-    <!-- Dependências existentes -->
-   <!-- Spring data jpa -->
+		<!-- Dependências existentes -->
+		<!-- Spring data jpa -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -53,7 +53,7 @@
 		<!-- mysql -->
 		<dependency>
 			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>			 
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
 		<!-- Migracoes - Flyway -->
@@ -77,19 +77,19 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
-	   <!--	<version>2.13.3</version>  -->
+			<!--	<version>2.13.3</version>  -->
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-		
-		
+
+
 		<!-- commons-lang3 <version>3.4</version> -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>			
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
 		<!-- JPA Modelgen -->
@@ -98,22 +98,41 @@
 			<artifactId>hibernate-jpamodelgen</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Segurança  version -5.7.1 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>		
+		</dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.5.1.RELEASE</version>
+		</dependency>
 
-  </dependencies>
-  	<build>
-		<plugins>			
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+
+		<!-- Necessário para o funcionamento do Opaque Token -->
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>oauth2-oidc-sdk</artifactId>
+			<version>9.37.2</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -121,6 +140,5 @@
 		</plugins>
 	</build>
 
- 
 
 </project>
