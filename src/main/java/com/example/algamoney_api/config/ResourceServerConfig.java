@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -30,7 +31,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
      
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password("admin")
@@ -49,6 +50,13 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
                 .csrf().disable()
                 .oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter());
     }
+
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        var secretKey = new SecretKeySpec("3032885ba9cd6621bcc4e7d6b6c35c2b".getBytes(), "HmacSHA256");
+
+        return NimbusJwtDecoder.withSecretKey(secretKey).build();
+    }
     
     @Bean
     @Override
@@ -57,33 +65,35 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Bean
-    public JwtDecoder jwtDecoder() {
-        String secretKeyString = "eltonLuiz";
-        var secretKey = new SecretKeySpec(secretKeyString.getBytes(), "HmacSHA256");
-
-        return NimbusJwtDecoder.withSecretKey(secretKey).build();
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
     
+    @Bean
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+       return super.userDetailsServiceBean();
+    }     
+        
     private JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
-            List<String> authorities = jwt.getClaimAsStringList("authorities");
+		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
+			List<String> authorities = jwt.getClaimAsStringList("authorities");
 
-            if (authorities == null) {
-                authorities = Collections.emptyList();
-            }
+			if (authorities == null) {
+				authorities = Collections.emptyList();
+			}
 
-            JwtGrantedAuthoritiesConverter scopesAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-            Collection<GrantedAuthority> grantedAuthorities = scopesAuthoritiesConverter.convert(jwt);
+			JwtGrantedAuthoritiesConverter scopesAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+			Collection<GrantedAuthority> grantedAuthorities = scopesAuthoritiesConverter.convert(jwt);
 
-            grantedAuthorities.addAll(authorities.stream()
-                    .map(SimpleGrantedAuthority::new)
-                    .collect(Collectors.toList()));
+			grantedAuthorities.addAll(authorities.stream()
+					.map(SimpleGrantedAuthority::new)
+					.collect(Collectors.toList()));
 
-            return grantedAuthorities;
-        });
+			return grantedAuthorities;
+		});
 
-        return jwtAuthenticationConverter;
-    }
-    
+		return jwtAuthenticationConverter;
+	}
 }
