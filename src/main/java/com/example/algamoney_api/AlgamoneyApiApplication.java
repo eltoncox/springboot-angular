@@ -4,6 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication // 
 public class AlgamoneyApiApplication {
@@ -21,4 +24,14 @@ public class AlgamoneyApiApplication {
         
     return messageSource;
     }
+	
+	@Bean
+	public WebMvcConfigurer corsConfigure() {
+		return new  WebMvcConfigurerAdapter() {
+			
+			public void adddCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/*").allowedOrigins("http:localhost:8000");
+			}
+		};
+	}
 }

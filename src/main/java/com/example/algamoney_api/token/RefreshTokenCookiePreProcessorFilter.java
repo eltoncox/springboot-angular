@@ -61,6 +61,6 @@ public class RefreshTokenCookiePreProcessorFilter implements Filter {
 			map.setLocked(true);
 			return map;
 		}
-		// Movendo o refresh token do cookie para a requisição
+		
 	}
 }
