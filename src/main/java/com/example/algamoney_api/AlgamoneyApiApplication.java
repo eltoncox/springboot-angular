@@ -22,16 +22,8 @@ public class AlgamoneyApiApplication {
         messageSource.setBasename("messages");
         messageSource.setDefaultEncoding("UTF-8");
         
-    return messageSource;
-    }
-	
-	@Bean
-	public WebMvcConfigurer corsConfigure() {
-		return new  WebMvcConfigurerAdapter() {
-			
-			public void adddCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/*").allowedOrigins("http:localhost:8000");
-			}
-		};
+        return messageSource;
+    
 	}
+	
 }

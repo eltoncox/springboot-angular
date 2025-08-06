@@ -31,8 +31,8 @@ public class CategoriaResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
-	//@CrossOrigin(maxAge = 10, origins = {"http://localhost:8000"})
 	@GetMapping
+	//@CrossOrigin(maxAge = 10, origins = {"http://localhost:8000"})
 	public List<Categoria> listar() {
 		return categoriaRepository.findAll();
 	}
