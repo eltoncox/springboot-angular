@@ -49,14 +49,14 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-		<!-- mysql -->
+		
+		<!-- mysql	-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-
-		<!-- Migracoes - Flyway -->
+		
+		<!-- Flyway -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
@@ -65,7 +65,7 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-mysql</artifactId>
-		</dependency>
+		</dependency>  
 
 		<!-- Hibernate Java 8 Support -->
 		<dependency>
@@ -139,15 +139,15 @@
 
 	</dependencies>
 	<build>
-		<plugins>		
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>			
+				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<!-- spring boot plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
